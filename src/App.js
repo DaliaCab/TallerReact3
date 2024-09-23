@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Ejercicios, { ContadorClase } from "./Ejercicios";
+import { render } from "@testing-library/react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props); //Llama al costructor de la clase base React.Component
+    this.state = { mostrarContador: true }; //Propiedad de estado que se usa para saber si se muestra o no el msj, está en true
+  }
+
+  toggleContador =()=>{ //Invertimos el valor de mostrar contador
+    this.setState((prevState) => ({
+      mostrarContador: !prevState.mostrarContador,  //Alternamos entre true y false
+    }));
+  }
+
+  render() {
+    return(
+      <div>
+        <button onClick={this.toggleContador}>
+          {this.state.mostrarContador ? "Desmonatar contador" : "Montar contador"}
+        </button>
+        {this.state.mostrarContador && <ContadorClase/>}
+      </div>
+    )
+  }
 }
 
 export default App;
